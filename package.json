@@ -1,0 +1,24 @@
+{
+  "name": "t2-office-environment",
+  "version": "0.0.0",
+  "description": "Tessel project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "www.github.com/tessel/t2-cli",
+  "keywords": [
+    "Tessel"
+  ],
+  "license": "MIT",
+  "readme": "A bare bones Tessel 2 blinky script.",
+  "dependencies": {
+    "airtable": "^0.5.10",
+    "ambient-attx4": "^0.2.11",
+    "climate-si7005": "^0.1.5",
+    "http": "0.0.0",
+    "os": "^0.1.1",
+    "request": "^2.88.0",
+    "tessel-led": "0.0.1"
+  }
+}
