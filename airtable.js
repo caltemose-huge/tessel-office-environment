@@ -1,8 +1,12 @@
 var tessel = require('tessel')
 var AirTable = require('airtable')
 var climatelib = require('climate-si7005')
-const led = require('tessel-led')
+// var ambientlib = require('ambient-attx4')
+var led = require('tessel-led')
+
 var climate = climatelib.use(tessel.port['A'])
+// var ambient = ambientlib.use(tessel.port['B']);
+
 var env = require('./env.json')
 
 var TIMEOUT = 15 *60*1000
@@ -31,13 +35,40 @@ function readClimate () {
             return
         }
 
-        // tempF = f
-        console.log(f)
         writeToAirtable(f)
-        // readAmbience()
+    })
+}
+/* 
+// not active - currently getting errors from ambient module
+// port or module may be broken
+
+function readAmbience () {
+    ambient.getLightLevel( (errL, dataL) => {
+        if (errL) {
+            console.log('Light err', errL)
+            console.log(dataL)
+            resetTimeout()
+            led.red.show()
+            return
+        }
+        console.log('lightlevel', dataL.toFixed(8))
+        reset()
     })
 
+    ambient.getSoundLevel( (err, data) => {
+        if (err) {
+            console.log('Sound err', err)
+            resetTimeout()
+            led.red.show()
+            return
+        }
+        var soundLevel = data.toFixed(8)
+        console.log('soundLevel', soundLevel)
+        
+    })
 }
+*/
+
 
 function resetLEDs () {
     led.blue.hide()
@@ -68,9 +99,10 @@ function writeToAirtable (f) {
             console.error(err);
             return;
         }
-        console.log(record.getId());
+        // console.log(record.getId());
         setTimeout(readClimate, TIMEOUT)
     });
 }
 
 readClimate()
+// readAmbience()
